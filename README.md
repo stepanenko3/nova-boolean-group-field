@@ -1,8 +1,8 @@
 # Nova Boolean Group
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/stepanenko3/nova-boolean-group.svg?style=flat-square)](https://packagist.org/packages/stepanenko3/nova-boolean-group)
-[![Total Downloads](https://img.shields.io/packagist/dt/stepanenko3/nova-boolean-group.svg?style=flat-square)](https://packagist.org/packages/stepanenko3/nova-boolean-group)
-[![License](https://poser.pugx.org/stepanenko3/nova-boolean-group/license)](https://packagist.org/packages/stepanenko3/nova-boolean-group)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/stepanenko3/nova-boolean-group-field.svg?style=flat-square)](https://packagist.org/packages/stepanenko3/nova-boolean-group-field)
+[![Total Downloads](https://img.shields.io/packagist/dt/stepanenko3/nova-boolean-group-field.svg?style=flat-square)](https://packagist.org/packages/stepanenko3/nova-boolean-group-field)
+[![License](https://poser.pugx.org/stepanenko3/nova-boolean-group-field/license)](https://packagist.org/packages/stepanenko3/nova-boolean-group-field)
 
 ![screenshot of field](screenshots/field.png)
 
