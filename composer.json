@@ -1,0 +1,37 @@
+{
+    "version": "1.0",
+    "name": "stepanenko3/nova-boolean-group-field",
+    "description": "Nova BooleanGroup advanced field based on native Nova field",
+    "keywords": [
+        "laravel",
+        "nova"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "laravel/nova": "^4.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://laravel-nova.site"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Stepanenko3\\NovaBooleanGroup\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Stepanenko3\\NovaBooleanGroup\\FieldServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
