@@ -14,7 +14,7 @@ Extended BooleanGroup Field for Laravel Nova
 
 - Grouped by prefix
 - Support dotted options
-- Support multidimensional arrays
+- Support multidimensional options
 - Toggle all checkboxes
 - Toggle group of checkboxes
 
