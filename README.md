@@ -12,7 +12,11 @@ Extended BooleanGroup Field for Laravel Nova
 
 ## Features
 
--
+- Grouped by prefix
+- Support dotted options
+- Support multidimensional arrays
+- Toggle all checkboxes
+- Toggle group of checkboxes
 
 ## Requirements
 
@@ -23,13 +27,7 @@ Extended BooleanGroup Field for Laravel Nova
 
 ```bash
 # Install the package
-composer require stepanenko3/nova-boolean-group
-```
-
-Publish the config file:
-
-``` bash
-php artisan vendor:publish --provider="Stepanenko3\NovaBooleanGroup\FieldServiceProvider" --tag="config"
+composer require stepanenko3/nova-boolean-group-field
 ```
 
 ## Usage
@@ -41,12 +39,37 @@ use Stepanenko3\NovaBooleanGroup\BooleanGroup;
 ...
 
 BooleanGroup::make('Permissions', 'permissions'),
+
+BooleanGroup::make('Layouts', 'layouts')->options([
+    'value1' => 'Value1',
+    'value2' => 'Value2',
+    'value3.value1' => 'Value3.1',
+    'value3.value2' => 'Value3.2',
+    'value4.value1' => 'Value4.1',
+    'value4.value2' => 'Value4.2',
+    'value5' => [
+        'value1' => 'Value5.1',
+        'value2' => 'Value5.2',
+        'value53' => [
+            'value1' => 'Value5.3.1',
+            'value2' => 'Value5.3.2',
+        ],
+    ],
+]),
+
+BooleanGroup::make('Permissions', 'permissions')
+    ->hideFalseValues(),
+
+BooleanGroup::make('Permissions', 'permissions')
+    ->hideTrueValues(),
 ```
 
 ## Screenshots
 
 ![screenshot of field](screenshots/field-dark.png)
 ![screenshot of field](screenshots/field-mobile.png)
+![screenshot of field](screenshots/field-detail.png)
+![screenshot of field](screenshots/field-index.png)
 
 ## Credits
 
