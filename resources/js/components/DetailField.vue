@@ -6,7 +6,7 @@
                     class="md:col-span-4 space-y-2"
                     v-for="(group, key) in groups"
                 >
-                    <h3 class="uppercase tracking-wide cursor-pointer font-bold text-xs" @click="() => toggleGroup(group)">
+                    <h3 class="uppercase tracking-wide cursor-pointer font-bold text-xs">
                         {{ key || "Main" }}
                     </h3>
 
