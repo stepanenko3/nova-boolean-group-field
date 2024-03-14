@@ -13,7 +13,8 @@ use Laravel\Nova\Nova;
 
 class BooleanGroup extends Field implements FilterableField
 {
-    use FieldFilterable, SupportsDependentFields;
+    use FieldFilterable;
+    use SupportsDependentFields;
 
     /**
      * The field's component.
@@ -53,10 +54,10 @@ class BooleanGroup extends Field implements FilterableField
     /**
      * Set the options for the field.
      *
-     * @param  \Closure():(array|\Illuminate\Support\Collection)|array|\Illuminate\Support\Collection  $options
+     * @param array|\Closure():(array|\Illuminate\Support\Collection)|\Illuminate\Support\Collection $options
+     *
      * @return $this
      */
-
     public function options(mixed $options): self
     {
         if (is_callable($options)) {
@@ -109,7 +110,8 @@ class BooleanGroup extends Field implements FilterableField
     /**
      * Set the text to be used when there are no booleans to show.
      *
-     * @param  string  $text
+     * @param string $text
+     *
      * @return $this
      */
     public function noValueText($text)
@@ -117,51 +119,6 @@ class BooleanGroup extends Field implements FilterableField
         $this->noValueText = $text;
 
         return $this;
-    }
-
-    /**
-     * Hydrate the given attribute on the model based on the incoming request.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @param  string  $requestAttribute
-     * @param  object  $model
-     * @param  string  $attribute
-     * @return void
-     */
-    protected function fillAttributeFromRequest(NovaRequest $request, $requestAttribute, $model, $attribute)
-    {
-        if ($request->exists($requestAttribute)) {
-            $model->{$attribute} = json_decode($request[$requestAttribute], true);
-        }
-    }
-
-    /**
-     * Make the field filter.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @return \Laravel\Nova\Fields\Filters\Filter
-     */
-    protected function makeFilter(NovaRequest $request)
-    {
-        return new BooleanGroupFilter($this);
-    }
-
-    /**
-     * Define the default filterable callback.
-     *
-     * @return callable(\Laravel\Nova\Http\Requests\NovaRequest, \Illuminate\Database\Eloquent\Builder, mixed, string):void
-     */
-    protected function defaultFilterableCallback()
-    {
-        return function (NovaRequest $request, $query, $value, $attribute) {
-            $value = collect($value)->reject(function ($value) {
-                return is_null($value);
-            })->all();
-
-            $query->when(!empty($value), function ($query) use ($value, $attribute) {
-                return $query->whereJsonContains($attribute, $value);
-            });
-        };
     }
 
     /**
@@ -196,5 +153,43 @@ class BooleanGroup extends Field implements FilterableField
             'options' => $this->options,
             'noValueText' => Nova::__($this->noValueText),
         ]);
+    }
+
+    /**
+     * Hydrate the given attribute on the model based on the incoming request.
+     *
+     * @param string $requestAttribute
+     * @param object $model
+     * @param string $attribute
+     */
+    protected function fillAttributeFromRequest(NovaRequest $request, $requestAttribute, $model, $attribute): void
+    {
+        if ($request->exists($requestAttribute)) {
+            $model->{$attribute} = json_decode($request[$requestAttribute], true);
+        }
+    }
+
+    /**
+     * Make the field filter.
+     *
+     * @return \Laravel\Nova\Fields\Filters\Filter
+     */
+    protected function makeFilter(NovaRequest $request)
+    {
+        return new BooleanGroupFilter($this);
+    }
+
+    /**
+     * Define the default filterable callback.
+     *
+     * @return callable(\Laravel\Nova\Http\Requests\NovaRequest, \Illuminate\Database\Eloquent\Builder, mixed, string):void
+     */
+    protected function defaultFilterableCallback()
+    {
+        return function (NovaRequest $request, $query, $value, $attribute): void {
+            $value = collect($value)->reject(fn ($value) => null === $value)->all();
+
+            $query->when(!empty($value), fn ($query) => $query->whereJsonContains($attribute, $value));
+        };
     }
 }

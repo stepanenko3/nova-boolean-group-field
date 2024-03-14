@@ -10,13 +10,11 @@ class FieldServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        Nova::serving(function (ServingNova $event) {
-            Nova::script('nova-boolean-group-field', __DIR__.'/../dist/js/field.js');
+        Nova::serving(function (ServingNova $event): void {
+            Nova::script('nova-boolean-group-field', __DIR__ . '/../dist/js/field.js');
         });
     }
 }
