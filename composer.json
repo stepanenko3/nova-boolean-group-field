@@ -31,5 +31,11 @@
     "require-dev": {
         "phpstan/phpstan": "^1.10",
         "tightenco/duster": "^2.7"
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://laravelsatis.com"
+        }
+    ]
 }
