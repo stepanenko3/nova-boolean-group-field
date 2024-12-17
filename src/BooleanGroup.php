@@ -126,7 +126,7 @@ class BooleanGroup extends Field implements FilterableField
      *
      * @return array
      */
-    public function serializeForFilter()
+    public function serializeForFilter(): array
     {
         return transform($this->jsonSerialize(), function ($field) {
             $field['options'] = collect($field['options'])->transform(function ($option) {
